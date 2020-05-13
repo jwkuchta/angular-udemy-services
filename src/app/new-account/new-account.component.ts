@@ -35,16 +35,22 @@ import { AccountsService } from '../accounts.service';
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
   // we need to add a property to use the service
-  providers: [LoggingService]
+  // providers: [LoggingService]
 })
 export class NewAccountComponent {
 
   // this is how we inform Angular we need an instance of this service
-  constructor(private loggingService: LoggingService, private accountsService: AccountsService) {}
+  constructor(private loggingService: LoggingService, 
+    private accountsService: AccountsService) {
+      // we subscribe/listen to the event emitted in account.component.ts
+      this.accountsService.statusUpdated.subscribe(
+        (status: string) => alert('New Status is: ' + status)
+      )
+    }
 
   onCreateAccount(accountName: string, accountStatus: string) {
     // console.log('A server status changed, new status: ' + accountStatus);
     this.accountsService.addAccount(accountName, accountStatus)
-    this.loggingService.logStatusChange(accountStatus)
+    // this.loggingService.logStatusChange(accountStatus)
   }
 }

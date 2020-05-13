@@ -31,7 +31,7 @@ import { AccountsService } from '../accounts.service';
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
-  providers: [LoggingService]
+  // providers: [LoggingService]
 })
 export class AccountComponent {
   @Input() account: {name: string, status: string};
@@ -42,7 +42,9 @@ export class AccountComponent {
 
   onSetTo(id: number, status: string) {
     // console.log('A server status changed, new status: ' + status);
-    this.loggingService.logStatusChange(status)
+    // this.loggingService.logStatusChange(status)
     this.accountsService.updateStatus(id, status)
+    // injected event emitter. Emitted here and listened to in new-account.component.ts
+    this.accountsService.statusUpdated.emit(status)
   }
 }

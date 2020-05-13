@@ -16,8 +16,4 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.accounts = this.accountService.accounts
   }
-  
-  // accounts array has been moved to accounts.service.ts
-
-  // onAccountAdded and onStatusChanges moved to accounts.service.ts
 }
